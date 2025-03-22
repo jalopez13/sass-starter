@@ -3,7 +3,7 @@
 import { zodResolver } from '@hookform/resolvers/zod';
 import { useForm } from 'react-hook-form';
 import { z } from 'zod';
-import { signupSchema } from '@/schema';
+import { signinSchema } from '@/schema';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import {
@@ -16,17 +16,16 @@ import {
 import { Github, Chrome } from 'lucide-react';
 import Link from 'next/link';
 
-const SignUpPage = () => {
-  const form = useForm<z.infer<typeof signupSchema>>({
-    resolver: zodResolver(signupSchema),
+const SignInPage = () => {
+  const form = useForm<z.infer<typeof signinSchema>>({
+    resolver: zodResolver(signinSchema),
     defaultValues: {
-      username: '',
       email: '',
       password: '',
     },
   });
 
-  async function onSubmit(values: z.infer<typeof signupSchema>) {
+  async function onSubmit(values: z.infer<typeof signinSchema>) {
     console.log(values);
   }
 
@@ -36,9 +35,9 @@ const SignUpPage = () => {
         {/* Form Header */}
         <div className="text-center mb-8">
           <h1 className="text-3xl font-bold mb-2 text-gray-900">
-            Create an account
+            Welcome back
           </h1>
-          <p className="text-gray-500">Sign up to create a new account</p>
+          <p className="text-gray-500">Sign in to your account</p>
         </div>
 
         {/* OAuth Buttons */}
@@ -50,39 +49,17 @@ const SignUpPage = () => {
 
           <Button className="w-full py-5 transition duration-200 flex items-center justify-center space-x-2 bg-red-600 hover:bg-red-700 text-white cursor-pointer">
             <Chrome className="w-5 h-5 text-white" />
-            <span className="font-medium">Sign Up with Google</span>
+            <span className="font-medium">Sign in with Google</span>
           </Button>
         </div>
 
-        {/* OAuth Buttons */}
+        {/* Form */}
         <Form {...form}>
           <form
             onSubmit={form.handleSubmit(onSubmit)}
             className="space-y-6"
           >
             <div className="space-y-4">
-              <div>
-                <label className="block text-sm font-medium text-gray-700 mb-1">
-                  Username
-                </label>
-                <FormField
-                  control={form.control}
-                  name="username"
-                  render={({ field }) => (
-                    <FormItem>
-                      <FormControl>
-                        <Input
-                          placeholder="Enter your username"
-                          className="w-full py-3 px-3 border border-gray-300 rounded-md"
-                          {...field}
-                        />
-                      </FormControl>
-                      <FormMessage />
-                    </FormItem>
-                  )}
-                />
-              </div>
-
               <div>
                 <label className="block text-sm font-medium text-gray-700 mb-1">
                   Email
@@ -141,19 +118,19 @@ const SignUpPage = () => {
               type="submit"
               className="w-full py-3 bg-gray-800 hover:bg-black text-white font-medium rounded-md cursor-pointer"
             >
-              Sign Up
+              Sign In
             </Button>
           </form>
         </Form>
 
         {/* Sign Up Link */}
         <div className="mt-6 flex items-center justify-center text-sm text-gray-500 space-x-2 cursor-pointer">
-          <span>Already have an account?</span>
+          <span>Don&apos;t have an account?</span>
           <Link
-            href="/signin"
+            href="/signup"
             className="text-gray-800 hover:text-black font-medium"
           >
-            Sign In!
+            Sign Up Now!
           </Link>
         </div>
 
@@ -161,14 +138,14 @@ const SignUpPage = () => {
         <div className="mt-8 text-center text-xs text-gray-500">
           By continuing, you agree to Supabase&apos;s
           <Link
-            href="#"
+            href="/terms"
             className="text-gray-500 hover:text-gray-700"
           >
             Terms of Service
           </Link>
           and
           <Link
-            href="#"
+            href="/privacy"
             className="text-gray-500 hover:text-gray-700"
           >
             Privacy Policy
@@ -180,4 +157,4 @@ const SignUpPage = () => {
   );
 };
 
-export default SignUpPage;
+export default SignInPage;
