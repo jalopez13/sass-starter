@@ -10,3 +10,4 @@ A starter for SaaS apps.
 - [x] Tanstack Query
 - [x] Server Actions
 - [x] Client Hooks
+- [x] Supabase Integration
